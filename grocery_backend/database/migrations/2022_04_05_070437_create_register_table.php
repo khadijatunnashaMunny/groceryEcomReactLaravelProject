@@ -21,7 +21,7 @@ class CreateRegisterTable extends Migration
             $table->string('password');
             $table->string('cpassword');
             $table->boolean('is_admin')->nullable();
-
+            $table->rememberToken();
             $table->timestamps();
         });
     }
