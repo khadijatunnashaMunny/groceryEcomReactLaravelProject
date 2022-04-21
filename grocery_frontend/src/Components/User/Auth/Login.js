@@ -33,6 +33,7 @@ export default function Login() {
         // login...
             axios.post('/api/login',data).then(res => {
                 if(res.data.status===200){
+                    
                     localStorage.setItem('auth_token',res.data.token);
                     localStorage.setItem('auth_name',res.data.name);
                     swal("success",res.data.message,"success");

@@ -30,7 +30,15 @@ class LoginController extends Controller
                  ]);
             }
             else{
-                $token = $user->createToken($user->email.'_Token')->plainTextToken;
+
+                if($user->is_admin == 1){
+                    $token = $user->createToken($user->email.'_AdminToken', ['server:admin'])->plainTextToken;
+
+
+                }
+                else{
+                    $token = $user->createToken($user->email.'_Token',[''])->plainTextToken;
+                }
                 return response()->json([
                     'status' => 200,
                     'token'=>$token,  
@@ -42,11 +50,6 @@ class LoginController extends Controller
             return $user->createToken($request->device_name)->plainTextToken;
         
         }
-
-    
-
-        $user = register::where(['email'=>$request->email,'password'=>$request->password])->first();
-        return $user;
 
       
 
